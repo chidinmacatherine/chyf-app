@@ -1,3 +1,9 @@
+from time import time
+
+REQUEST_LOG = {}
+MAX_REQUESTS_PER_IP_PER_HOUR = 5
+WINDOW_SECONDS = 60 * 60  # 1 hour
+
 import os
 from flask import Flask, request, jsonify, send_from_directory
 from dotenv import load_dotenv
@@ -33,6 +39,21 @@ def api_plan():
         return jsonify({
             "error": "SAFETY_BLOCKED"
         }), 400
+    
+    # Simple rate limit by IP
+    ip = request.remote_addr or "unknown"
+    now = time()
+
+    timestamps = REQUEST_LOG.get(ip, [])
+    timestamps = [t for t in timestamps if now - t < WINDOW_SECONDS]
+
+    if len(timestamps) >= MAX_REQUESTS_PER_IP_PER_HOUR:
+        return jsonify({
+            "error": "RATE_LIMIT_IP"
+        }), 429
+
+    timestamps.append(now)
+    REQUEST_LOG[ip] = timestamps
 
     if not goals:
         return jsonify({"error": "No goals provided."}), 400

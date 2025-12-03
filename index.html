@@ -193,7 +193,7 @@
             return;
         }
 
-        output.innerHTML = '<div class="loading-text">CHYF is listening and shaping your day. This can take up to 10 seconds…</div>';
+        output.innerHTML = '<div class="loading-text">CHYF is listening and shaping your day ✍️. This can take up to 10 seconds…</div>';
 
         try {
             const resp = await fetch('/api/plan', {
@@ -208,7 +208,7 @@ if (!resp.ok) {
     if (data && data.error === "SAFETY_BLOCKED") {
         output.innerHTML = `
             <div class="limit-message">
-                CHYF is just a gentle planning companion and isn’t able to help with this kind of request.
+                CHYF is just a gentle planning companion ☁️ and isn’t able to help with this kind of request.
                 If you’re worried about your safety or someone else’s, please reach out to a trusted person 
                 or local emergency or crisis service right away.
             </div>
@@ -216,6 +216,29 @@ if (!resp.ok) {
         return;
     }
 
+    if (data && data.error === "RATE_LIMIT_IP") {
+        output.innerHTML = `
+            <div class="limit-message">
+                CHYF has given you a lot of guidance in a short time from this device. 
+                To keep things gentle (and free), please pause for a bit 😴 and try again later.
+            </div>
+            <div class="quote-block">
+                "The journey of a thousand miles begins with one step."
+                <div class="quote-author">— Lao Tzu</div>
+            </div>
+            <div class="section-title">In the meantime, here is a simple way to move 💪:</div>
+            <ol>
+                <li>List your top 3 goals from what you wrote above.</li>
+                <li>Choose just one to begin with — the one that unlocks the most relief or momentum.</li>
+                <li>Set a 20–25 minute timer and work only on that.</li>
+                <li>Take 5 minutes to breathe, drink water, or walk.</li>
+                <li>Repeat once or twice. That’s enough for today to have counted 🌱.</li>
+            </ol>
+        `;
+        return;
+    }
+
+    // generic network/quota error
     output.innerHTML = `
         <div class="limit-message">
             Hmmm... CHYF's AI focus paused for a moment (network or quota). 
@@ -231,12 +254,12 @@ if (!resp.ok) {
             <li>Choose just one to begin with — the one that unlocks the most relief or momentum.</li>
             <li>Set a 20–25 minute timer and work only on that.</li>
             <li>Take 5 minutes to breathe, drink water, or walk.</li>
-            <li>Repeat once or twice. That's enough for today to have counted.</li>
+            <li>Repeat once or twice. That’s enough for today to have counted 🌱.</li>
         </ol>
     `;
-
     return;
 }
+
 
 
 
