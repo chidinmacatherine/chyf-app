@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chidinma Helps You Focus (CHYF): WDYWTD?</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            max-width: 700px; 
+            margin: 0 auto; 
+            padding: 20px; 
+            background: radial-gradient(circle at top, #fee2e2 0%, #111827 60%);
+            min-height: 100vh;
+            color: #111827;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 24px 22px 26px 22px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+            border: 1px solid #fecaca;
+        }
+        h1 {
+            text-align: left;
+            color: #991b1b;
+            margin-bottom: 4px;
+            font-size: 1.9rem;
+            letter-spacing: 0.03em;
+        }
+        .subtitle {
+            color: #6b7280;
+            font-size: 0.95rem;
+            margin-bottom: 18px;
+        }
+        .tagline {
+            color: #b91c1c;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.13em;
+            margin-bottom: 10px;
+        }
+        textarea { 
+            width: 100%; 
+            height: 130px; 
+            padding: 14px; 
+            border: 1px solid #fecaca; 
+            border-radius: 12px; 
+            font-size: 15px;
+            resize: vertical; 
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            outline: none;
+        }
+        textarea:focus {
+            border-color: #dc2626;
+            box-shadow: 0 0 0 1px #fee2e2;
+        }
+        label {
+            display: block;
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-bottom: 6px;
+        }
+        button { 
+            width: 100%; 
+            padding: 13px; 
+            background: linear-gradient(135deg, #ef4444, #b91c1c); 
+            color: white; 
+            border: none; 
+            border-radius: 999px; 
+            font-size: 16px; 
+            font-weight: 600;
+            cursor: pointer; 
+            margin-top: 14px; 
+            transition: all 0.2s ease-out;
+        }
+        button:hover { 
+            transform: translateY(-1px); 
+            box-shadow: 0 8px 18px rgba(185,28,28,0.35); 
+        }
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+        }
+        #output { 
+            margin-top: 18px; 
+            padding: 18px 16px; 
+            background: #fef2f2; 
+            border-radius: 12px; 
+            border: 1px solid #fecaca;
+            line-height: 1.65; 
+            font-size: 0.95rem;
+            max-height: 380px;
+            overflow-y: auto;
+        }
+        .quote-block { 
+            background: #991b1b; 
+            color: #fee2e2; 
+            padding: 14px 16px; 
+            border-radius: 12px; 
+            margin-bottom: 14px; 
+            font-style: italic; 
+            font-size: 0.98rem;
+            position: relative;
+        }
+        .quote-block::before {
+            content: "“";
+            font-size: 2.6rem;
+            position: absolute;
+            left: 10px;
+            top: -10px;
+            color: #fecaca;
+            opacity: 0.35;
+        }
+        .quote-author {
+            margin-top: 6px;
+            font-style: normal;
+            font-size: 0.85rem;
+            opacity: 0.9;
+            text-align: right;
+        }
+        .section-title {
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #991b1b;
+        }
+        ol { 
+            padding-left: 20px; 
+            margin-top: 4px; 
+        }
+        ol li { 
+            margin-bottom: 6px; 
+        }
+        .status {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #9ca3af;
+        }
+        .loading-text {
+            text-align: center; 
+            color: #b91c1c; 
+            font-size: 0.95rem; 
+        }
+        .limit-message {
+            background: #fef3c7;
+            border: 1px solid #facc15;
+            padding: 12px 12px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        .tiny {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="tagline">CHIDINMA HELPS YOU FOCUS · CHYF</div>
+        <h1>WDYWTD?<br>What Do You Want To Do Today?</h1>
+        <div class="subtitle">
+            Tell CHYF what matters today. I’ll give you a focused quote and a realistic sequence to move through your day.
+        </div>
+
+        <label for="goals">What do you want to do today?</label>
+        <textarea id="goals" placeholder="Example: finish draft of chapter, send two important emails, 30 minutes of movement, 20 minutes of reading for joy..."></textarea>
+        
+        <button onclick="planDay()">Let CHYF Plan My ✨Focused✨ Day</button>
+        
+        <div id="output"></div>
+        <div class="tiny" style="margin-top: 10px;">
+        Let’s get the serious part out of the way: CHYF is a simple planning companion, not a therapist, doctor, lawyer, or emergency service. 
+    Please use your own judgment and reach out to qualified professionals for medical, legal, or mental health decisions.
+</div>
+        <div class="tiny">
+            Powered by Groq’s daily free quota. When it’s used up, CHYF will reset at midnight.
+        </div>
+    </div>
+
+    <script>
+    async function planDay() {
+        const goals = document.getElementById('goals').value.trim();
+        const output = document.getElementById('output');
+
+        if (!goals) {
+            alert('Please tell CHYF what you want to do today first.');
+            return;
+        }
+
+        output.innerHTML = '<div class="loading-text">CHYF is listening and shaping your day. This can take up to 10 seconds…</div>';
+
+        try {
+            const resp = await fetch('/api/plan', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ goals })
+            });
+
+            const data = await resp.json();
+
+if (!resp.ok) {
+    if (data && data.error === "SAFETY_BLOCKED") {
+        output.innerHTML = `
+            <div class="limit-message">
+                CHYF is just a gentle planning companion and isn’t able to help with this kind of request.
+                If you’re worried about your safety or someone else’s, please reach out to a trusted person 
+                or local emergency or crisis service right away.
+            </div>
+        `;
+        return;
+    }
+
+    output.innerHTML = `
+        <div class="limit-message">
+            Hmmm... CHYF's AI focus paused for a moment (network or quota). 
+            Come back after 🌙 midnight 🌒 when everything resets 💤.
+        </div>
+        <div class="quote-block">
+            "The journey of a thousand miles begins with one step."
+            <div class="quote-author">— Lao Tzu</div>
+        </div>
+        <div class="section-title">In the meantime, here is a simple way to move 💪:</div>
+        <ol>
+            <li>List your top 3 goals from what you wrote above.</li>
+            <li>Choose just one to begin with — the one that unlocks the most relief or momentum.</li>
+            <li>Set a 20–25 minute timer and work only on that.</li>
+            <li>Take 5 minutes to breathe, drink water, or walk.</li>
+            <li>Repeat once or twice. That's enough for today to have counted.</li>
+        </ol>
+    `;
+
+    return;
+}
+
+
+
+// Clean up quote: remove any AUTHOR line and trailing "Chidinma Helps You Focus"
+let rawQuote = data.quote || "";
+
+// Remove lines starting with AUTHOR:
+rawQuote = rawQuote.replace(/AUTHOR:\s*.*$/gi, "");
+
+// Remove any explicit "Chidinma Helps You Focus" the model adds
+rawQuote = rawQuote.replace(/[-–]\s*Chidinma Helps You Focus/gi, "").trim();
+
+const quoteHtml = rawQuote.replace(/\n/g, "<br>");
+let planText = data.plan || "";
+
+// Remove markdown bold markers like **text**
+planText = planText.replace(/\*\*(.*?)\*\*/g, "$1");
+
+// Make PLAN: bold and separate from the numbered steps
+planText = planText.replace(/^PLAN:/i, "<strong>PLAN:</strong>");
+
+// Convert newlines to <br>
+const planHtml = planText.replace(/\n/g, "<br>");
+
+
+output.innerHTML = `
+    <div class="quote-block">
+        ${quoteHtml}<br>
+        <div class="quote-author">— CHYF</div>
+    </div>
+    <div class="section-title">Your focused sequence for today:</div>
+    <div style="margin-top: 6px;">
+        ${planHtml}
+    </div>
+`;
+
+       } catch (error) {
+    output.innerHTML = `
+        <div class="limit-message">
+            Hmmm... CHYF's AI focus paused for a moment (network or quota). 
+            Come back after 🌙 midnight 🌒 when everything resets 💤.
+        </div>
+        <div class="quote-block">
+            "The journey of a thousand miles begins with one step."
+            <div class="quote-author">— Lao Tzu</div>
+        </div>
+        <div class="section-title">In the meantime, here is a simple way to move 💪:</div>
+        <ol>
+            <li>List your top 3 goals from what you wrote above.</li>
+            <li>Choose just one to begin with — the one that unlocks the most relief or momentum.</li>
+            <li>Set a 20–25 minute timer and work only on that.</li>
+            <li>Take 5 minutes to breathe, drink water, or walk.</li>
+            <li>Repeat once or twice. That's enough for today to have counted.</li>
+        </ol>
+    `;
+
+}
+
+    }
+    </script>
+</body>
+</html>
