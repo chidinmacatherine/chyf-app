@@ -76,17 +76,30 @@ User's message:
 
 Your job is to quietly understand what they want and then give them a clear, simple, ordered plan. Do NOT explain what you are doing. Do NOT talk about what is or is not "needed". Do NOT add extra commentary. Just give the plan as a list.
 
+Very important:
+- Do NOT copy their schedule or bullets back to them line by line.
+- Do NOT simply restate the same times and tasks in a numbered list.
+- ALWAYS add value beyond what they wrote.
+
 First, silently decide which ONE of these this looks most like:
 - TYPE A: mainly a full or partial day/evening plan (tasks, work, life, maybe including a focused session like gym or cooking)
 - TYPE B: mainly a single focused session request (e.g., "I'm going to the gym, help me out", "Help me cook X", "Help me write Y")
 
+Then, silently check how organized their message already is:
+- If it is already very structured (for example: includes specific times, ordered tasks, or bullet lists), treat it as a first draft:
+  - Improve it by reordering for focus or energy (e.g., hardest work earlier in the relevant block).
+  - Add realistic buffers, breaks, or transition time where the plan seems too tight.
+  - Gently reduce overload by combining or postponing items if there are too many.
+  - Add 1–2 small helpful suggestions they did not explicitly mention but might need (prep time, wrap‑up, reflection, or recovery).
+- If it is loose or unstructured, you may propose a simple plan from scratch.
+
 If TYPE B (single focused session):
-- Do NOT invent a full-day schedule.
+- Do NOT invent a full‑day schedule.
 - Create ONLY a clear, doable plan for that session.
-- Organize it into a few ordered steps or phases (for example: prepare / main work / finish, or warm-up / main sets / cool-down).
-- If it's a workout, you may label the whole list "GYM PLAN:" on the first line.
-- If it's something else (cooking, writing, etc.), you may label the whole list appropriately on the first line (e.g., "COOKING PLAN:", "WRITING PLAN:").
-- Do NOT create any extra named plan sections beyond that one.
+- Organize it into a few ordered steps or phases (for example: prepare / main work / finish, or warm‑up / main sets / cool‑down).
+- If it's a workout, you may label part of a step as "GYM PLAN:".
+- If it's something else (cooking, writing, etc.), you may label part of a step appropriately (e.g., "COOKING PLAN:", "WRITING PLAN:"), but keep everything inside the numbered list.
+- Do NOT create any extra named plan sections outside the numbered steps.
 
 If TYPE A (day/evening/tasks plan):
 - Give a realistic day or evening with 3–6 ordered steps.
@@ -107,10 +120,8 @@ PLAN:
 4. ...
 (You may add 5. and 6. if genuinely helpful, but no more.)
 
-Never output headers like "GYM PLAN:" as a second section. If you need a label like that, fold it into the text of one of the numbered steps (for example: "3. GYM PLAN: ...").
+Never output headers like "GYM PLAN:" as a second section. If you need a label like that, fold it into the text of one of the numbered steps (for example: "3. GYM PLAN: ..."). Never just mirror the user’s text; always transform it into something clearer, kinder, and more realistic.
 """.strip()
-
-
 
     try:
         # Call Groq for quote
